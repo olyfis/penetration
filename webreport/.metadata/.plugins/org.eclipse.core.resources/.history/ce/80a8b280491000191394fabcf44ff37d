@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>date-picker-demo</title>
+    
+    <link rel="stylesheet" href="includes/t1/nice-date-picker.css">
+    <script src="includes/t1/nice-date-picker.js"></script>
+</head>
+<body>
+<div class="container">
+
+  
+    <div id="calendar2">
+        <div id="calendar1-wrapper2"></div>
+        <span class="calendar2-msg"></span>
+    </div>
+
+</div>
+<script>
+
+
+    new niceDatePicker({
+        dom:document.getElementById('calendar1-wrapper2'),
+           mode:'en',
+        onClickDate:function(date){
+            document.querySelector('.calendar2-msg').innerHTML='calendar2 your selected '+date;
+        }
+    });
+</script>
+</body>
+</html>

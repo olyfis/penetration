@@ -1,0 +1,4 @@
+10.160.43.108 - - [18/Dec/2018:09:55:35 -0500] "GET /webreport/sfquery HTTP/1.1" 200 112
+10.160.43.108 - - [18/Dec/2018:11:29:46 -0500] "GET /webreport/sfquery HTTP/1.1" 200 112
+10.160.43.108 - - [18/Dec/2018:14:17:59 -0500] "GET /webreport/sfquery HTTP/1.1" 200 112
+10.160.43.108 - - [18/Dec/2018:14:20:54 -0500] "GET /webreport/sfquery HTTP/1.1" 200 112

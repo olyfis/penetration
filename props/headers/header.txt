@@ -1,0 +1,28 @@
+AVP ID
+Area VP
+EQUIP RVP ID
+Equipment RVP
+Equip. Rep ID
+Equipment Rep
+Contarct Number
+In Evergreen?
+Agreement Number
+Customer Name
+Date Commenced
+Actual Term
+Actual Term Date
+Invoicing Term
+Actual Term Date
+Total Equipment Cost
+Residual
+FIS Territory
+FIS Rep
+End of Term Option
+Service on Lease
+Product Group
+Equip City
+Equip State
+Prog Type
+Delinquency Status
+CPP Non-Reporting Amount
+CPP Rate

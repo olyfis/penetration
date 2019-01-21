@@ -1,0 +1,9 @@
+package com.olympus.rest;
+
+public class GetFileAttrs {
+
+	public GetFileAttrs() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

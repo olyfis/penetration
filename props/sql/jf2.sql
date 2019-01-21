@@ -1,0 +1,65 @@
+SELECT DISTINCT  
+                CUST_CREDIT_ACCT,
+                CUST_ID,
+                UATB_SC_CUST_NAME,
+                CD_AR_STATE,
+                CR_ATTG_NAME,
+                CONTRACT_NO,
+                LEAD_BANK,
+                UATB_SC_AM_PURCHASE_OPTION,
+                UATB_SC_CPP_TERM_CALC3A,
+                UATB_SC_CPP_TERM_CALC3B,
+                UATB_SC_REMAINING_PROCEDURES,
+                UATB_JS_TOTAL_EQUIP_PYMT_RATE,
+                UATB_JS_TOTAL_SVC_PYMT_OR_RATE,
+                LS_MASTER.UATB_SC_ACTIV_DATE,
+                TERM_DATE,
+                CONTRACT_TERM,
+                PYMTS_ARREARS,
+                UATB_JS_IRR_DEC5,
+                UATB_KB_PUR_OPTION_DESC,
+                RESIDUAL,
+                NEXT_AGING_DATE,
+                EQUIPMENT_COST,
+                STATE_TAX_RATE,
+                CNTY_TAX_AMT,
+                CITY_TAX_RATE,
+                TCNTY_TAX_RATE,
+                TCITY_TAX_RATE,
+                STATE_MISC_TAX_RATE,
+                CNTY_MISC_TAX_RATE,
+                CITY_MISC_TAX_RATE,
+                TCNTY_MISC_TAX_RATE,
+                TCITY_MISC_TAX_RATE,
+                FIRST_PYMT_DATE,
+                UATB_JS_ADJ_TERM,
+                UATB_JS_EOT_LTR_TERM_DATE,
+                UATB_SC_UM_ALPHA_FIELD5,
+                PROGRAM_TYPE,
+                UATB_SC_BRANCH,
+                UATB_SC_CPP_TERM_CALC1,
+                AS_MASTER.ID,
+                UATB_JS_ASSET_VENDOR_NAME,
+                EQUIP_DESC,
+                MODEL,
+                SERIAL_NUMBER,
+                QUANTITY,
+                EQUIP_COST,
+                RESID_AMT,
+                INVOICING_DATE,
+                A_RENTAL_AMT 
+FROM 
+                AS_MASTER_RPTS_NF AS_MASTER,  
+                LS_MASTER_RPTS_NF LS_MASTER,  
+                CS_DEFAULTS_NF CS_DEFAULT,  
+                LS_BILLING_NF LS_BILLING,  
+                AS_MASTER_RPTS_A_LOCATIONS AS_MASTER_,  
+                AS_LOCATION_NF AS_LOCATION 
+WHERE 
+                AS_MASTER.CONTRACT_NO = LS_MASTER.ID
+                AND LS_MASTER.CUST_CREDIT_ACCT = CS_DEFAULT.ID
+                AND LS_MASTER.ID = LS_BILLING.ID
+                AND AS_MASTER.ID = AS_MASTER_.ID
+                AND AS_MASTER_.A_LOCATIONS = AS_LOCATION.ID
+                AND ( UATB_SC_NUM_OF_ASSETS <> 0
+                AND CONTRACT_NO IN( ? ))  ORDER BY 5

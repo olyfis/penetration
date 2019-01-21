@@ -1,0 +1,9 @@
+package com.olympus.rest;
+
+public class D_Date {
+
+	public D_Date() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

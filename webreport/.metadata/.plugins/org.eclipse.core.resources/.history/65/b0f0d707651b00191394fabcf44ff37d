@@ -1,0 +1,54 @@
+// A $( document ).ready() block.
+$( document ).ready(function() {
+    console.log( "ready!" );
+    $.ajax({
+    	type: 'Get',
+        url: 'http://localhost:8181/webreport/getchart',
+        dataType: "json",
+        success: function(data) {
+        	console.log(data);
+        	var pending = [];
+        	var release = [];
+        	
+        	for (var i in data) {
+        		pending.push("pending" + data[i].pending)
+        		release.push("release" + data[i].release)
+        	}
+        	
+        	
+        	
+        	var chartdata = {
+        		    type: 'bar',
+        		    data: {
+        		      labels: ["Pending", "Released"],
+        		      datasets: [
+        		        {
+        		          label: "> 95% Shipped By Status",
+        		          backgroundColor: "#3e95cd",
+        		          data: [133,221]
+        		        }  
+        		      ]
+        		    },
+        		    options: {
+        		      title: {
+        		        display: true,
+        		        text: 'Transaction Dashboard'
+        		      }
+        		    }
+        		}
+        	
+        	
+        	
+        	
+        	
+        	
+        },
+        error:	function(data) {
+        	console.log(data);
+        },
+    	
+    });
+    
+    
+    
+});

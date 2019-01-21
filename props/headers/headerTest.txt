@@ -1,0 +1,11 @@
+AVP ID:sml
+Area VP:sml
+EQUIP RVP ID:med
+Equipment RVP:lrg
+Equip. Rep ID:med
+Equip Rep:sml
+Equip one:lrg
+Equip. Rep ID2:med
+Equip Rep 3:sml
+Equip. Rep ID3:lrg
+Equip Rep 4:med

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;calendar.css&apos; to &apos;calendar.css&apos;&#x0D;&#x0A;- Original project: &apos;webreport&apos;&#x0D;&#x0A;- Destination element: &apos;calendar.css&apos;&#x0D;&#x0A;- Original element: &apos;calendar.css&apos;" description="Copy file" element1="WebContent/includes/css/calendar.css" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1542645198354" target="/webreport/WebContent/includes/css/calendar.css" units="0" version="1.0"/>
+</session>

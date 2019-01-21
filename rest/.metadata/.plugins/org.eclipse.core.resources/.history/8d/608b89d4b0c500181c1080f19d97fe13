@@ -1,0 +1,26 @@
+package com.olympus.rest;
+
+/* http://localhost:8181/dashboard/fis/getdate */
+
+import javax.ws.*;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+
+
+import java.io.File;
+import java.io.IOException;
+
+
+
+
+@Path("getdate")
+public class FileDate {
+
+	@GET
+	@Produces(MediaType.TEXT_HTML)
+	public String returnLastModifyDate() {
+		
+		return "<H4>Date</H4>";
+	}
+
+}

@@ -1,0 +1,5 @@
+0:0:0:0:0:0:0:1 - - [09/Jan/2019:10:27:15 -0500] "POST /webreport/ajax.jsp?atype=60 HTTP/1.1" 200 1146
+0:0:0:0:0:0:0:1 - - [09/Jan/2019:10:27:17 -0500] "POST /webreport/results.jsp HTTP/1.1" 302 -
+fe80:0:0:0:20f0:d92f:b5ff:315e%5 - - [09/Jan/2019:10:27:17 -0500] "GET /webreport/ilreport?mType=LSHP HTTP/1.1" 200 11726
+fe80:0:0:0:20f0:d92f:b5ff:315e%5 - - [09/Jan/2019:10:27:21 -0500] "POST /webreport/j_security_check HTTP/1.1" 303 -
+fe80:0:0:0:20f0:d92f:b5ff:315e%5 - fisrep [09/Jan/2019:10:27:21 -0500] "GET /webreport/ilreport?mType=LSHP HTTP/1.1" 200 100330

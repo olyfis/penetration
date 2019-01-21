@@ -1,0 +1,27 @@
+// A $( document ).ready() block.
+$( document ).ready(function() {
+    console.log( "ready!" );
+    $.ajax({
+    	type: 'Get',
+        url: 'https://api.github.com/users/mralexgray/repos',
+        dataType: "json",
+        success: function(data) {
+        	console.log(data);
+        	var arr1 = [];
+        	var arr2 = [];
+        	
+        	for (var i in data) {
+        		arr1.push("ID" + data[i].id)
+        	}
+        	
+        	
+        },
+        error:	function(data) {
+        	console.log(data);
+        },
+    	
+    });
+    
+    
+    
+});

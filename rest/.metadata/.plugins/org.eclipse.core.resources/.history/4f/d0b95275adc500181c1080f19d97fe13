@@ -1,0 +1,18 @@
+package com.olympus.rest;
+
+import javax.ws.*;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+
+@Path("getdate")
+public class D_Date {
+
+	@GET
+	@Produces(MediaType.TEXT_HTML)
+	public String returnLastModifyDate() {
+		// TODO Auto-generated constructor stub
+		
+		return "<H4>Date</H4>";
+	}
+
+}

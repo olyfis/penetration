@@ -1,0 +1,7 @@
+myHost = cvsql03.oai.olympusglobal.com
+userID = rapport
+passWord = rapport
+port = 1433
+dbClass =  com.microsoft.sqlserver.jdbc.SQLServerDriver
+databaseName = Rapport
+dbmsType = rapport

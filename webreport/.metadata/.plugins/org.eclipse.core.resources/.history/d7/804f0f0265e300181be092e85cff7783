@@ -1,0 +1,46 @@
+package com.olympus.webreport;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+public class WriteExcel {
+	
+	XSSFWorkbook workbook = new XSSFWorkbook();
+	XSSFSheet sheet = workbook.createSheet("Datatypes in Java");
+
+	/***********************************************************************************************************************************/
+	public static XSSFSheet newWorkSheet(XSSFWorkbook workbook, String label) {
+
+		XSSFSheet sheet = workbook.createSheet(label);
+		return sheet;
+	}
+
+	/***********************************************************************************************************************************/
+	public static XSSFWorkbook newWorkbook() {
+
+		XSSFWorkbook workbook = new XSSFWorkbook();
+		return workbook;
+	}
+
+	/***********************************************************************************************************************************/
+	public static void loadWorkSheet(XSSFWorkbook workbook, XSSFSheet sheet, ArrayList<String> strArr) {
+		
+		System.out.println("************* strArr=" + strArr.toString());
+	}
+	/***********************************************************************************************************************************/
+	public static void loadHeader(XSSFWorkbook workbook, XSSFSheet sheet, ArrayList<String> headerArr) {
+		
+		System.out.println("************* strArr=" + headerArr.toString());
+	}
+	
+	/***********************************************************************************************************************************/
+
+}
