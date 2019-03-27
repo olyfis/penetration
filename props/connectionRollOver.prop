@@ -1,0 +1,8 @@
+myHost = cvsql03.oai.olympusglobal.com
+userID = rapport
+passWord = rapport
+port = 1433
+dbClass =  com.microsoft.sqlserver.jdbc.SQLServerDriver
+databaseName = RollOverTest
+dbmsType = rapport
+url = jdbc:sqlserver://cvyhj1d10.oai.olympusglobal.com:1433;databaseName=RollOverTest;user=rapport;password=rapport;

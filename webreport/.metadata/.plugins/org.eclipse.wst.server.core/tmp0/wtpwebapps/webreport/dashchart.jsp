@@ -29,6 +29,7 @@
 <script type="text/javascript" src="includes/js/chartjs/Chart.js"></script>
 <script type="text/javascript" src="includes/js/chartjs/Chart.min.js"></script>
 <script type="text/javascript" src="includes/js/chartjs/getappdata.js"></script>
+<script type="text/javascript" src="includes/js/chartjs/getappdataSBO3.js"></script>
 
 </head>
 <body>

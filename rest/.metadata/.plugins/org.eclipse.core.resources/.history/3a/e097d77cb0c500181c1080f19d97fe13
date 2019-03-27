@@ -1,9 +1,0 @@
-package com.olympus.rest;
-
-public class FileDate {
-
-	public FileDate() {
-		// TODO Auto-generated constructor stub
-	}
-
-}

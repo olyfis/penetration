@@ -126,7 +126,7 @@ to refresh the menus.
         <select name="actiontype" onchange='ajaxFunction()' >
           <option value="0">Select Action</option>
            <option value="5">FIS Live Transaction Dashboard</option>
-           
+           <option value="9">FIS Live Transaction Dashboard (No Filters)</option>
             <option value="30">Rapport Booking Report</option>"
            <option value="75">Rapport Booking Summary Report</option>"
             <option value="25">Infolease Booking Report</option>"
@@ -164,6 +164,6 @@ to refresh the menus.
 
 
  </form>
-<h5>If you requirie access to the reports, please contact: Jason.Gehrke@olympus.com</h5>
+<h5>If you require access to the reports, please contact: Jason.Gehrke@olympus.com</h5>
 </body>
 </html>

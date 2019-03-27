@@ -1,1 +1,0 @@
-10.160.73.50 - - [14/Jan/2019:15:02:39 -0500] "GET /webreport/BookingReportExcel?startDate=2018-11-01&endDate=2018-11-07&mType=ILB HTTP/1.1" 200 4175

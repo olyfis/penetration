@@ -1,0 +1,9 @@
+package com.olympus.rest;
+
+public class GetFileDate {
+
+	public GetFileDate() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

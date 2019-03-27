@@ -44,6 +44,12 @@
 			String redirectURL = "http://" + hostname2  + ":8181/fisAssetServlet/dashboard.html";
 			response.sendRedirect(redirectURL);
 			
+		} else if (at.equals("9")) {
+			String hostname2 = "cvyhj3a27";
+			String redirectURL = "http://" + hostname2  + ":8181/fisAssetServlet/dashnf/dashnf.html";
+			response.sendRedirect(redirectURL);
+
+		
 		} else if (at.equals("26")) {
 			String date = request.getParameter("date");
 			 System.out.println("******************* DATE=" + date );

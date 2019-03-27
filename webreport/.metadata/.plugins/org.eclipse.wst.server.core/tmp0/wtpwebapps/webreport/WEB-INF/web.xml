@@ -193,4 +193,16 @@
 		<url-pattern>/getchart</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>GetSFDate</servlet-name>
+		<servlet-class>com.olympus.webreport.GetFileDateSF</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GetSFDate</servlet-name>
+		<url-pattern>/getsfdate</url-pattern>
+	</servlet-mapping>
+
+	
+	
+	
 </web-app>

@@ -15,9 +15,20 @@
 <head>
 <meta charset="ISO-8859-1">
 <title><%=title%></title>
-<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+ <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> 
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.9.1/jquery.tablesorter.min.js"></script>
 <script type="text/javascript" src="includes/js/tableFilter.js"></script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+ 
+<script src='includes/js/multifilter.js'></script>
+<script type='text/javascript'>
+$(document).ready(function() {
+$('.filter').multifilter()
+})
+</script>
+
+
 <style><%@include file="includes/css/reports.css"%></style>
 <style><%@include file="includes/css/table.css"%></style>
 <style><%@include file="includes/css/header.css"%></style>
@@ -175,10 +186,23 @@ public String TableHeader(){
 		// Output Table 
 	%>	
 		<input id="search" type="text" placeholder="Enter Text to Filter...">
+		
+		
+	<div class='filter-container'>
+	
+	<input autocomplete='off' class='filter' name='Customer Name' placeholder='Customer Name' data-col='Customer Name'/>
+	<input autocomplete='off' class='filter' name='Branch' placeholder='Branch' data-col='Branch'/>
+	<input autocomplete='off' class='filter' name='Contract Term' placeholder='Contract Term' data-col='Contract Term'/>
+	
+	</div>
+		
+		<!--  <input autocomplete='off' class='filter' name='Customer Name' placeholder='Customer Name' data-col='Customer Name'/>  -->
+	
 <h5></h5>
 
 <%
-		out.println("<table class=\"tablesorter\" border=\"1\"> <thead> <tr>");
+		 out.println("<table class=\"tablesorter\" border=\"1\"> <thead> <tr>");
+	//out.println("<table class=\"filter\" border=\"1\"> <thead> <tr>");
 		//String header = buildHeader(out, headerArr); // build header from file
 		//out.println(header);
 			out.println(TableHeader());

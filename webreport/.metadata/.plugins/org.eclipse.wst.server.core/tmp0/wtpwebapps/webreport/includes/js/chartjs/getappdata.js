@@ -3,7 +3,9 @@ $( document ).ready(function() {
     console.log( "ready!" );
     $.ajax({
     	type: 'Get',
-        url: 'http://localhost:8181/webreport/getchart',
+        //url: 'http://cvyhj3a27:8181/webreport/getchart?cType=SBS',
+        url: 'http://localhost:8181/webreport/getchart?cType=SBS',
+        
         dataType: "json",
         success: function(data) {
         	console.log(data);
@@ -18,62 +20,7 @@ $( document ).ready(function() {
         	}
         	var p = pending_arr[0];
         	var r = released_arr[0];
-        	
-        	/*
-        	new Chart(document.getElementById("mycanvas"), {
-        	    type: 'bar',
-        	    scaleOverride : true,
-                scaleSteps : 1,
-               // scaleStepWidth : 50,
-                scaleStartValue : 0,
-                
-        	    data: {
-        	    	//labels: ["Pending", "Released"],
-        	    	
-        	    	datasets: [
-        	    		
-        	            {
-        	              label: "Pending",
-        	              backgroundColor: "#3e95cd",
-        	          
-        	              data: [p ]
-        	            }, {
-        	              label: "Released",
-        	              backgroundColor: "#8e5ea2",
-        	               
-        	              data: [r]
-        	            }
-        	          ]
-        	    },
-        	    options: {
- 
-        	      title: {
-        	        display: true,
-        	        text: '> 95% Shipped By Status'
-        	      }
-        	    }
-        	});
-        	
-        	*/
-        	
-        	/*
-        	
-        	scales: {
-        		yAxes: [{
-        			
-        			ticks: {
-                        beginAtZero: true,
-                        steps: 5,
-                        stepValue: 1,
-                        max: 60 //max value for the chart is 60
-                        }
-                    
-        			
-        		}]
-        		
-      
-            }
-        */
+
         	var config = {
         			type: 'bar',
             	    
@@ -122,7 +69,7 @@ $( document ).ready(function() {
                                         beginAtZero: true,
                                         steps: 10,
                                         stepValue: 5,
-                                        max: 50
+                                        max: 35
                                     }
                                 }]
                         },
