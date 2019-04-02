@@ -1,0 +1,14 @@
+Asset_ID
+Contract_Number
+Customer_Name
+Date_Commenced
+Term
+Term_Date
+Equip_City
+Equip_State
+Quantity
+Model
+Serial_Number
+Asset_Rental
+Rental_Percent
+Misc_Amount
