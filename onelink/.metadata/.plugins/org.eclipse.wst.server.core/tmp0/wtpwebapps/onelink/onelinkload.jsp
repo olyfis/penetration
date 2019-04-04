@@ -156,12 +156,14 @@ if ((contentType.indexOf("multipart/form-data") >= 0)) {
        //out.println("<h5>******* filename=" +baseFileName  + "--</h5>");
              %>
   <!--    ************************************************************************************************************************ -->
+	<h5>Create OneLink Upload CSV Template </h5>
+	
 	<form action="/onelink/getcsv" method="get">
 		<table border="1">
 			<tr bgcolor="#5DADE2" style="font-family: sans-serif; color: white;">
 			<th class="a">File Name</th>
 				<th class="a">Contract ID</th>
-				<th class="a">Create OneLink Upload CSV Template</th>
+				<th class="a">Create Template</th>
 			</tr>
 			<tr>
 			
