@@ -1,5 +1,0 @@
-INDEX VERSION 1.131
-C:\Java_Dev\onelink\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2368829481.index
-\onelink\src
-C:\Java_Dev\onelink\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2330808057.index
-\onelinkup\src
