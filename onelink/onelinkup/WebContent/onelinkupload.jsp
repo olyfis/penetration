@@ -15,7 +15,7 @@
    <description>Location to store uploaded file</description> 
    <param-name>file-upload</param-name> 
    <param-value>
-      D:\Pentaho\Kettle\RollOver\Upload\
+    C:\temp\
    </param-value> 
 </context-param>
 -->
@@ -171,8 +171,7 @@ if ((contentType.indexOf("multipart/form-data") >= 0)) {
 				<th class="a">Contract ID</th>
 				<th class="a">Create Template</th>
 			</tr>
-			<tr>
-			
+			<tr>			
 			<td>  <%= baseFileName %> </td>
 				<td><input type="text" id="id" name="id"
 					maxlength="20" size="20"></td>

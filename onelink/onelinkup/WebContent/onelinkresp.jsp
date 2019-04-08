@@ -15,7 +15,7 @@
    <description>Location to store uploaded file</description> 
    <param-name>file-upload</param-name> 
    <param-value>
-      D:\Pentaho\Kettle\RollOver\Upload\
+      C:\temp\
    </param-value> 
 </context-param>
 -->
@@ -39,30 +39,34 @@
 <script type="text/javascript" src="includes/js/tableFilter.js"></script>
 <link rel="stylesheet" href="includes/css/calendar.css" />
 
+ <script>			
+	var getDetails = function(id){
+		var myID = document.getElementById(id).value;
+		//alert("****** myID=" + myID + " ID=" + id);
+		//alert("in Quote" + myID + " --- id=" +id);
+		//window.open("http://cvyhj3a27:8181/onelinkup/getdata?id=" + myID, 'popUpWindow','height=1000,width=1200,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes' );
+		window.open("http://localhost:8080/onelinkup/getdata?id=" + myID, 'popUpWindow','height=1000,width=1200,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes' );
+	}	
+</script>
+
 
 </head>
-
 <%!/*******************************************************************************************************************************************************************/
 public ArrayList<String> readFileData(String filePath){
 	 ArrayList<String> arr = new ArrayList<String>();
 	 
      try (BufferedReader br = new BufferedReader(new FileReader(filePath)))
      {
-
          String sCurrentLine;
-
          while ((sCurrentLine = br.readLine()) != null) {
              arr.add(sCurrentLine);
          }
-
      } catch (IOException e) {
          e.printStackTrace();
      } 
 	return arr;
 }
-
 /*******************************************************************************************************************************************************************/
-
 public static String basename(String path) {
 		String filename = "";
 		//System.out.println("PATH=" + path);
@@ -72,39 +76,28 @@ public static String basename(String path) {
 		return filename;
 	}
 /*******************************************************************************************************************************************************************/
-
-
-
 %>
-
-
 <body>
  <%@include  file="includes/header.html" %>
 <%
 //retrieve your list from the request, with casting 
 ArrayList<String> dataArr = new ArrayList<String>();
 String rowColor = null;
-
 //out.println("<h5>Response received</h5>");
-
 String formUrl =  (String) session.getAttribute("formUrl");
 dataArr = (ArrayList<String>) session.getAttribute("csvArr");
 String rowEven = "#D7DBDD";
 String rowOdd = "AEB6BF";
 String xDataItem = null;
-
 formUrl = "/onelinkup/excel";
-
 //String[] csvarr = dataArr.toArray(new String[dataArr.size()]);
- 
-
+ String contractID = (String) session.getAttribute("contractID");
 session.setAttribute("csvArr", dataArr);
 %>
 <table class="noBorder">
 <tr  class="noBorder" ><td  class="noBorder">
 <!--    ************************************************************************************************************************ -->
 <form name="excelForm" enctype="multipart/form-data" method="get" action=" <%=formUrl%> " \>
-
 <% 
 //out.println("<input type=\"hidden\"  name=\"startDate\" value=\"" + startDate  +  "\" >" );
 //out.println("<input type=\"hidden\"  name=\"endDate\" value=\"" + endDate  +  "\" >" );
@@ -112,63 +105,61 @@ session.setAttribute("csvArr", dataArr);
 out.println("<input type=\"submit\" value=\"Save Excel File\" class=\"btn\" /> ");
 out.println("</form>");
  
+ out.println("</td><td class=\"noBorder\">");
+
+
+
+ %>
+  
+ 		<form enctype="multipart/form-data" method="post">
+ 						 
+ 				 
+ 						
+ 						<input type="hidden" id="<%= contractID  %>" value="<%= contractID  %>" />
+ 						<!--  Need unique ID value -->
+ 						<input class="btn"  type="button" onclick="getDetails(document.getElementById('<%= contractID  %>').id)" value="Get Infolease Data"/> 
+ 				
+ 					</form>
+ 
+ <% 
+
+
 out.println("</td></tr></table><br>");
  
+ /*****************************************************************************************************************************************************************************/
+
+ //out.println("DS=" + dataArr.size());
  
-/*******************************************************************************************************************************************************************/
+ if (dataArr.size() > 0 ) {
+	out.println("<table> ");
+	for (int i = 0; i < dataArr.size(); i++) {
+		rowColor = (i % 2 == 0) ? rowEven : rowOdd;
+		out.println("<tr bgcolor=" + rowColor + ">");
 
-
-out.println("<table  border=\"1\" >  <tr bgcolor=\"#5DADE2\"  style=\"font-family: sans-serif; color: white;\" >");
-
-
-//out.println("<th class=\"a\" >DB Status </th>");
-String line = dataArr.get(0);
-String[] list = line.split(",");
-int sz = list.length;
-// System.out.println("*** SZ=" + sz + "---");
-/*
-for (int m = 0; m <= sz; m++) {
-	   if (m != 0) {
-		    //out.println("<th class=\"a\" >Column " + (m - 1) + "</th>");
-		    out.println("<th class=\"a\" >Column " + m  + "</th>");
-		   
-	   }
-}
-*/
-for (int j = 0; j < dataArr.size(); j++) {
-		rowColor = (j % 2 == 0) ? rowEven : rowOdd;
-		 out.println("<tr bgcolor=" + rowColor + ">");
-
-		xDataItem = dataArr.get(j);
-	 
+		xDataItem = dataArr.get(i);
 		String token_list[] = xDataItem.split(",");
-		String idVal = token_list[0];
 		
+		for (int x = 0; x < token_list.length; x++) {
+			if ( x == 2) {		
 
-
-// out.println("<tr>");
-
-for (int x = 0; x < token_list.length; x++) {
-	  
-		out.println("<td>" + token_list[x] +"</td>");
-	}
-
-out.println("</tr>");
-
-
-
-} // end outter loop
-out.println("</table> <BR>");
-
-
-
-/*******************************************************************************************************************************************************************/
+			out.println("<td class=\"odd\">" + token_list[x] + "</td>");
+			} else {			
+					out.println("<td class=\"odd\">" + token_list[x] + "</td>");
+				}
+		} // end inner for
+			out.println("</tr>");
+	} // end outer for
+	
+	out.println("</td></tr></table><br>");
+}
+ 
+ 
+ 
+  /*****************************************************************************************************************************************************************************/
 
 
 
 %>
-
-
 
 </body>
 </html>

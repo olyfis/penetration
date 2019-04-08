@@ -14,7 +14,15 @@
       c:\Java_Dev\props\onelinkup\upload\
    </param-value> 
 </context-param>
-  
+or 
+
+   <context-param> 
+   <description>Location to store uploaded file</description> 
+   <param-name>file-upload</param-name> 
+   <param-value>
+      c:\temp\
+   </param-value> 
+</context-param>
 -->
 
 

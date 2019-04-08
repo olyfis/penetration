@@ -1,21 +1,8 @@
 package com.olympus.onelink;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.net.InetAddress;
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import javax.servlet.Servlet;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,29 +13,19 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
-import java.util.Set;
 //import com.olympus.util.JButils;
 import org.w3c.dom.NodeList;
 
 import com.olympus.olyutil.Olyutil;
 
 import java.sql.*;
-import java.text.DateFormat;
 import java.text.DecimalFormat;
-import java.text.Format.Field;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Enumeration;
 import com.olympus.asset.AssetData;
  
@@ -310,7 +287,7 @@ public class OneLink  extends HttpServlet {
 			for (String token : strSplitArr) {
 				Cell cell = row.createCell(colNum++);
 				if (token instanceof String) {
-					cell.setCellValue((String) token);
+					cell.setCellValue(token);
 				}
 			}
 		}
@@ -334,47 +311,46 @@ public class OneLink  extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String contractID = "";
-		List<AssetData> assets = new ArrayList<AssetData>();
-		ArrayList<String> strArr = new ArrayList<String>();
-		ArrayList<String> csvArr = new ArrayList<String>();
-		// ArrayList<String> newCsvArr = new ArrayList<String>();
-		// String sheetNameValue = null;
-		// String reportNameValue = null;
-		// String headerFile = null;
-		String paramName = "id";
-		String paramValue = request.getParameter(paramName);
-		//if ((paramValue != null && !paramValue.isEmpty()) && paramValue.equals("id")) {
-		if ((paramValue != null && !paramValue.isEmpty())) {	
-			 contractID = paramValue.trim();
-			 //System.out.println("*** contractID:" + contractID);			 
-		}
-		String baseFileName = "baseFileName";
-		String baseFileNameValue = request.getParameter(baseFileName);
-		//System.out.println("*** baseFileNameValue:" + baseFileNameValue);
-		String csvFile = "C:\\temp\\" + baseFileNameValue;
 		
-		//final Date date = Olyutil.getCurrentDate();
-		//String dateStamp = date.toString();
-		//System.out.println("Date=" + dateStamp);
-		strArr = getDbData(contractID);
-		// Olyutil.printStrArray(strArr);
-		assets = setArrData(strArr);
-		//System.out.println("assetList SIZE:" + assets.size());
-		/*
-		 * for(int i = 0 ; i < assets.size() ; i++){ System.out.println("AssetID:" +
-		 * assets.get(i).getId() ); System.out.println("Rate:" +
-		 * assets.get(i).getEquipPercent() ); }
-		 */
-		csvArr = getCsvData(assets, csvFile);
-		
-		String dispatchJSP = "/onelinkresp.jsp";
-		request.getSession().setAttribute("csvArr",csvArr);
-		// req.getSession().setAttribute(paramName, paramValue);
-
-		 request.getRequestDispatcher(dispatchJSP).forward(request, response);
-		
-		
-		 
+		 List<AssetData> assets = new ArrayList<AssetData>();
+			ArrayList<String> strArr = new ArrayList<String>();
+			ArrayList<String> csvArr = new ArrayList<String>();
+			// ArrayList<String> newCsvArr = new ArrayList<String>();
+			// String sheetNameValue = null;
+			// String reportNameValue = null;
+			// String headerFile = null;
+			String paramName = "id";
+			String paramValue = request.getParameter(paramName);
+			//if ((paramValue != null && !paramValue.isEmpty()) && paramValue.equals("id")) {
+			if ((paramValue != null && !paramValue.isEmpty())) {	
+				 contractID = paramValue.trim();
+				 //System.out.println("*** contractID:" + contractID);			 
+			}
+			String baseFileName = "baseFileName";
+			String baseFileNameValue = request.getParameter(baseFileName);
+			//System.out.println("*** baseFileNameValue:" + baseFileNameValue);
+			// set in web.xml
+			String csvFile = "C:\\temp\\" + baseFileNameValue;
+			//String csvFile = "C:\\Java_Dev\\props\\onelinkup\\upload\\" + baseFileNameValue;
+			
+			
+			//System.out.println("***^^^*** in doGet()-- File=" + csvFile);
+			 
+			//final Date date = Olyutil.getCurrentDate();
+				//String dateStamp = date.toString();
+				//System.out.println("Date=" + dateStamp);
+				strArr = getDbData(contractID);
+				
+				assets = setArrData(strArr);
+				//System.out.println("assetList SIZE:" + assets.size());
+				csvArr = getCsvData(assets, csvFile);
+				String dispatchJSP = "/onelinkresp.jsp";
+				request.getSession().setAttribute("csvArr", csvArr);
+				
+				
+				request.getSession().setAttribute("contractID", contractID);
+				request.getRequestDispatcher(dispatchJSP).forward(request, response);
 	}
+
 }
 
