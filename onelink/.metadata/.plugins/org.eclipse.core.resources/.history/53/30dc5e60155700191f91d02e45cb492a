@@ -1,0 +1,43 @@
+package com.olympus.onelink;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.w3c.dom.NodeList;
+
+@WebServlet("/getdata")
+public class GetInfoleaseData extends HttpServlet { 
+	
+	// Service method of servlet
+	static Statement stmt = null;
+	static Connection con = null;
+	static ResultSet res  = null;
+	static NodeList  node  = null;
+	static String s = null;
+	static private PreparedStatement statement;
+	static String propFile = "C:\\Java_Dev\\props\\unidata.prop";
+	
+	static String sqlFile = "C:\\Java_Dev\\props\\sql\\onelinkfull.sql";
+	
+
+	/****************************************************************************************************************************************************/
+	/****************************************************************************************************************************************************/
+
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String contractID = "";
+
+	}
+	/****************************************************************************************************************************************************/
+
+}
