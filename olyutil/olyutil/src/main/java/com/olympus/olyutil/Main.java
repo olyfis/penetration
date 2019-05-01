@@ -38,9 +38,7 @@ public class Main {
 	
 	*/
 	
-	public static void main(String[] args) throws Exception { // Auto-generated method stub
-		
-		
+	public static void main(String[] args) throws Exception { // Auto-generated method stub	
 		String result = null;
 		Olyutil jutil = new Olyutil();
 		//FileInputStream fis = new FileInputStream("C:\\Java_Dev\\props\\connection.prop");
@@ -127,7 +125,5 @@ public class Main {
 		// convert to string object and print it
 		// System.out.println("Query Read: " + sb.toString());
 		// System.out.println("*** END");
-		
 	}
 }
-

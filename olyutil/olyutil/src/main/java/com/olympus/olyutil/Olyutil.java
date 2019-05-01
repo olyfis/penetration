@@ -617,5 +617,34 @@ public class Olyutil {
 	    java.util.Date today = new java.util.Date();
 	    return new  Date(today.getTime());
 	}
+	/*************************************************************************************************************************************************************/
+	/*  return 0  if dates equal 		 -- startDate: 2018-04-11        endDate: 2018-04-11
+	 	return 1  if startDate < endDate -- startDate: 2000-04-11        endDate: 2019-04-11
+	 	return -1 if startDate > endDate -- startDate: 2018-04-11        endDate: 2017-04-11
+	 */
+	
+	public static int dateCompare(String startDate, String endDate, String fmt ) throws IOException { // String fmt == "yyyy-MM-dd";
+
+		DateFormat dateFormat = new SimpleDateFormat(fmt);
+		/* Date date = new Date();
+		String currentDate =  dateFormat.format(date); */
+		
+		Date date1 = null;
+		Date date2 = null; 
+		
+		try {
+			  date1 =  dateFormat.parse(startDate);
+			  date2 = dateFormat.parse(endDate);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return date2.compareTo(date1);	
+	}	
+	/*************************************************************************************************************************************************************/
+
+	
+	/*************************************************************************************************************************************************************/
+
 }
 
