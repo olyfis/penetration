@@ -50,7 +50,21 @@
 			response.sendRedirect(redirectURL);
 
 		
-		} else if (at.equals("26")) {
+		} else if (at.equals("99")) {
+			String hostname2 = "cvyhj3a27";
+			String redirectURL = "http://" + hostname2  + ":8181/penetration/penetration.jsp";
+			response.sendRedirect(redirectURL);
+
+		
+		} else if (at.equals("100")) {
+			String hostname2 = "cvyhj3a27";
+			String redirectURL = "http://" + hostname2  + ":8181/webreport/validatecontract.jsp";
+			response.sendRedirect(redirectURL);
+
+		
+		}
+
+		else if (at.equals("26")) {
 			String date = request.getParameter("date");
 			 System.out.println("******************* DATE=" + date );
 			String redirectURL = "http://" + hostname  + ":8181/webreport/ilbook?date=" + date;

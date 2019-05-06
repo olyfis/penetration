@@ -2,29 +2,30 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="formUrl" key="selection"/>
-		<item value="true" key="casesensitive"/>
+		<item value="Last" key="selection"/>
+		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="formUrl"/>
-			<item value="xDataItem"/>
-			<item value="FILE_NAME"/>
-			<item value="splitStr"/>
-			<item value="WriteExcel"/>
-			<item value="excel"/>
-			<item value="assetList"/>
-			<item value="Connected"/>
+			<item value="Last"/>
+			<item value="Expire"/>
+			<item value="Note"/>
+			<item value="out.println"/>
+			<item value="itemSz"/>
+			<item value="userDate1"/>
 			<item value="Date"/>
-			<item value="getCsvData"/>
-			<item value="Invoice"/>
-			<item value="Invoice\"/>
-			<item value="loadCsvAsset"/>
-			<item value="getAssetInfo"/>
-			<item value="newLine"/>
+			<item value="conne"/>
+			<item value="query"/>
+			<item value="expire"/>
+			<item value="Lease"/>
+			<item value="Commen"/>
+			<item value="getDbData"/>
+			<item value="add"/>
+			<item value="put"/>
 		</list>
 		<list key="replacehistory">
+			<item value=" "/>
 			<item value="JButils"/>
 		</list>
 	</section>
@@ -32,7 +33,7 @@
 		<item value="284" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="391" key="DIALOG_HEIGHT"/>
-		<item value="1640" key="DIALOG_X_ORIGIN"/>
-		<item value="10" key="DIALOG_Y_ORIGIN"/>
+		<item value="1414" key="DIALOG_X_ORIGIN"/>
+		<item value="269" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>
