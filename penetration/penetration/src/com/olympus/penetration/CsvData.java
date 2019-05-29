@@ -7,11 +7,22 @@ public class CsvData {
 	private double fisSales;
 	private double eligSales;
 	private double penPercent;
+	private int position;
 	
 
 	/****************************************************************************************************************************************************/	
 	public CsvData() {
 		// TODO Auto-generated constructor stub
+	}
+
+
+	public int getPosition() {
+		return position;
+	}
+
+
+	public void setPosition(int position) {
+		this.position = position;
 	}
 
 

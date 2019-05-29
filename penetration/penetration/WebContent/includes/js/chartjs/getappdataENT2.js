@@ -70,7 +70,7 @@ $( document ).ready(function() {
      var config = {
       	  type: 'bar',
     	  data: {	 
-    		  labels: month_arr,   
+    		  labels: month_arr,  
     	    datasets: [	 	    	
     	        {
     	        	type: 'line',
