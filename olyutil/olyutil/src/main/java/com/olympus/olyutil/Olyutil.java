@@ -1,6 +1,7 @@
 package com.olympus.olyutil;
 
 import java.io.*;
+import java.lang.reflect.*;
 import java.nio.file.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -23,10 +24,12 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.w3c.dom.*; 
 import org.json.*;
+
  
 public class Olyutil {
 	/*************************************************************************************************************************************************************/
 	// Service method of servlet
+	// Version 1.0.2
 	static Statement stmt = null;
 	static Connection con = null;
 	static ResultSet res = null;
@@ -34,6 +37,179 @@ public class Olyutil {
 	static String s = null;
 	static private PreparedStatement statement;
 	
+	/*****************************************************************************************************************************************************/
+	public static ArrayList<String> getHashKeys(HashMap<String, String> kitMap, String key) throws IOException {
+			String valStr = "";;
+			ArrayList<String> strArr = new ArrayList<String>();
+			String mapVal = "";
+			
+			Iterator it = kitMap.entrySet().iterator();
+		    while (it.hasNext()) {
+		    	Map.Entry pair = (Map.Entry)it.next();
+		    	
+		    	if ( pair.getKey().equals(key)) {
+		    		mapVal = (String) pair.getValue();
+		    		//System.out.println("**** mapData:" + pair.getKey() + " = " +mapVal);
+		    		String[] items = mapVal.split(";");
+		    		for (int i = 0; i < items.length; i++) {
+		    			strArr.add(items[i]);
+		    		}		
+		    	}
+		        it.remove(); // avoids a ConcurrentModificationException
+		    }
+			
+			return(strArr);
+		}
+		
+	/*****************************************************************************************************************************************************/	
+		public static void displayHashData(HashMap<String, String> kitMap, String key) throws IOException {
+			String valStr = "";;
+			ArrayList<String> strArr = new ArrayList<String>();
+			String mapVal = "";
+			
+			Iterator it = kitMap.entrySet().iterator();
+		    while (it.hasNext()) {
+		    	Map.Entry pair = (Map.Entry)it.next();
+		    	
+		    	if ( pair.getKey().equals(key)) {
+		    		mapVal = (String) pair.getValue();
+		    		System.out.println("**** mapData:" + pair.getKey() + " = " +mapVal);
+		    		 
+		    	}
+		        it.remove(); // avoids a ConcurrentModificationException
+		    }
+			
+	 
+		}
+		
+	/*****************************************************************************************************************************************************/
+		
+	
+	/****************************************************************************************************************************************************/
+		// String dateFmt = formatDate("yyyy-MM-dd");
+		// String dateFmt = Olyutil.formatDate("yyyy-MM-dd hh:mm:ss.SSS");
+		
+		public static String formatDate(String format) throws IOException {
+			SimpleDateFormat dateFormat = new SimpleDateFormat(format);
+			Date date = new Date();
+			return(dateFormat.format(date));
+		}
+	/****************************************************************************************************************************************************/
+	public static String getOlyutilVersion () {
+		String ver = " 1.0.2";
+		return(ver);
+	}
+	/***********************************************************************************************************************************/
+
+	/***********************************************************************************************************************************/
+
+	
+	
+	/****************************************************************************************************************************************************/
+	public static double strToDouble(String str) {
+		double rtn = 0.0;
+		if (! isNullStr(str)) {
+			rtn = Double.parseDouble(str.replaceAll(",", ""));
+		}		
+		return(rtn);
+	}
+	/****************************************************************************************************************************************************/
+	public static int strToInteger(String str) {
+		int rtn = 0;
+		if (!  isNullStr(str)) {
+			rtn = Integer.parseInt(str.replaceAll(",", ""));
+		}		
+		return(rtn);
+	}
+
+	/****************************************************************************************************************************************************/
+	public static long strToLong(String str) {
+		long rtn = 0;
+		if (!  isNullStr(str)) {
+			rtn = Long.parseLong(str.replaceAll(",", ""));
+		}		
+		return(rtn);
+	}
+	
+	
+	/****************************************************************************************************************************************************/
+
+	
+	/****************************************************************************************************************************************************/
+	public static boolean isNumeric(String str) {
+		return str.matches("[+-]?\\d*(\\.\\d+)?");
+	}
+	/****************************************************************************************************************************************************/
+	public static Properties getPropertiesObj(String propFile) throws IOException, SQLException {
+		Properties connectionProps = new Properties();
+		
+		FileInputStream fis = null;
+		FileReader fr = null;
+		//String s = new String();
+		//StringBuffer sb = new StringBuffer();
+		//ArrayList<String> strArr = new ArrayList<String>();
+		try {
+			fis = new FileInputStream(propFile);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		connectionProps.load(fis);
+		
+		return(connectionProps);
+	}
+	
+	/****************************************************************************************************************************************************/
+	public static boolean isNullStr(String str) {
+
+		if (str == null || str.equals("null") || str.equals("")) {
+			return true;
+		}
+		return false;
+	}
+	/****************************************************************************************************************************************************/
+	public static String[] splitStr(String string, String delimiter) {
+
+		String[] result = null;
+
+		if (!isNullStr(string)) {
+			result = string.split(delimiter);
+			int array_length = result.length;
+
+			for (int i = 0; i < array_length; i++) {
+				result[i] = result[i].trim();
+			}
+		}
+		return result;
+	}
+	/****************************************************************************************************************************************************************/
+
+	/****************************************************************************************************************************************************************/
+	public static void displayObjGetters(Object obj) throws IOException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		
+		for (Method m : obj.getClass().getMethods())
+		    if (m.getName().startsWith("get") && m.getParameterTypes().length == 0) {
+		      final Object r = m.invoke(obj);
+		      // do your thing with r
+		      System.out.println("Method:" + m.getName() + " -- Returns:" + r.toString() );
+		    }
+
+}
+	
+	/****************************************************************************************************************************************************************/
+	public static void displayObj(Object obj) throws IOException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		
+		for (Method m : obj.getClass().getMethods())
+		    if (m.getName().startsWith("get") && m.getParameterTypes().length == 0) {
+		      final Object r = m.invoke(obj);
+		      // do your thing with r
+		      System.out.println("Method:" + m.getName() + " -- Returns:" + r.toString() );
+		    }
+
+}
+	
+	
+	/****************************************************************************************************************************************************/
+ 
 	/*************************************************************************************************************************************************************/
 	//method to print array
 	public static void printName(ArrayList<String> line_arr) {
@@ -45,22 +221,14 @@ public class Olyutil {
 			// System.out.println(names[index]);
 	}
 	/*************************************************************************************************************************************************************/
-	public static String[] splitStr(String string, String delimiter){
-		 String[] result  = string.split(delimiter);
-		 int array_length = result.length;
-
-		 for(int i =0; i < array_length ; i++){
-		  result[i]=result[i].trim();
-		 }
-		 return result;
-	}
+ 
 	/*************************************************************************************************************************************************************/
 	public static ResultSet getResultSet(Connection conn, String query) throws SQLException {
 		stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery(query);
 		return (rs);
 	}
-	 
+	/*************************************************************************************************************************************************************/	 
 	public static ResultSet getResultSetPS(PreparedStatement stmt) throws SQLException {
 		ResultSet rs = stmt.executeQuery();
 		return (rs);
@@ -83,7 +251,6 @@ public class Olyutil {
 		}	
 		return fileListArr;
 	}
-	
 	/*************************************************************************************************************************************************************/
 	public String do_getQuery(String sqlFilePath ) throws Exception { // read a query from a file and return the query
 		 String queryStr = "";
@@ -104,7 +271,6 @@ public class Olyutil {
 		 return query;
 	 }
 	/*************************************************************************************************************************************************************/
-
 	public ArrayList<String> do_runQuery(Connection con, String query, String sep) throws Exception { // 
 		ArrayList<String> strArr = new ArrayList<String>();	
 
@@ -124,9 +290,7 @@ public class Olyutil {
 		} // end finally try			
 		return strArr;
 	}
-	
 	/*************************************************************************************************************************************************************/
-
 	public Boolean do_checkDbRec(Connection con, String recID, String query, String sep) throws Exception { // check for a particular recordId in a table
 		
 		Boolean status = false;
@@ -152,8 +316,6 @@ public class Olyutil {
 		
 		return status;
 	}
-	
-	
 	/*************************************************************************************************************************************************************/	
 	public static String baseName(String path) {
 		String filename = "";
@@ -164,11 +326,8 @@ public class Olyutil {
 		return filename;
 	}
 	/*************************************************************************************************************************************************************/
-
 	/*************************************************************************************************************************************************************/	
-
 	public void moveFile(String src, String dest) {
-
 		CopyOption[] options = new CopyOption[] { StandardCopyOption.REPLACE_EXISTING };
 
 		Path sourcePath = Paths.get(src);
@@ -194,9 +353,7 @@ public class Olyutil {
 			e.printStackTrace();
 		}
 	}
-	
 	/*************************************************************************************************************************************************************/	
-
 	public static ArrayList<String> resultSetArray(ResultSet rs, String sep) throws SQLException {
 		ArrayList<String> arrStr = new ArrayList<String>();
 		ArrayList<String> xData = new ArrayList<String>();
@@ -361,7 +518,6 @@ public class Olyutil {
 	}
 	/*************************************************************************************************************************************************************/
 	public static void displayJsonArray(JSONArray jsonArr) {
-
 		Iterator<Object> iterator = jsonArr.iterator();
 		// Set<String> keys = jsonObject.keySet();
 		while (iterator.hasNext()) {
@@ -383,7 +539,6 @@ public class Olyutil {
 	public static String displayResults(ResultSet rs) throws SQLException {
 		String result = null;
 		JSONObject root = new JSONObject();
-
 		int i = 1;
 		//System.out.println("Display results");
 		root.put("recs", "recs");
@@ -534,26 +689,22 @@ public class Olyutil {
 	}
 	/*************************************************************************************************************************************************************/
 	public static ArrayList<String> readInputFile(String fileName) {
-		ArrayList<String> data = new ArrayList<String>();
-		
+		ArrayList<String> data = new ArrayList<String>();	
 		File txt = new File(fileName);
 		Scanner scan = null;
 		try {
 			scan = new Scanner(txt);
 			while(scan.hasNextLine()){
 			    data.add(scan.nextLine());
-			}
-			
+			}	
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			scan.close();
-		}
-		 
+		}	 
 		//System.out.println("Data=" + data.toString());
-		
-		
+			
 		return data;
 	}
 	/*************************************************************************************************************************************************************/
@@ -561,18 +712,16 @@ public class Olyutil {
 	// displayHash -- display Hashtable
 	/*************************************************************************************************************************************************************/
 	public static void displayHash(Hashtable hashtable) {
-
 		Enumeration names = null;
 		String key = null;
-
 		names = hashtable.keys();
+		
 		while (names.hasMoreElements()) {
 			key = (String) names.nextElement();
 			System.out.println("Key:" + key + " -> Value:" + hashtable.get(key));
 		}
 	}
 	/*************************************************************************************************************************************************************/
-
 	public static FileTime getCreationTime(File file) throws IOException {
 		Path p = Paths.get(file.getAbsolutePath());
 		BasicFileAttributes view = Files.getFileAttributeView(p, BasicFileAttributeView.class).readAttributes();
@@ -622,7 +771,6 @@ public class Olyutil {
 	 	return 1  if startDate < endDate -- startDate: 2000-04-11        endDate: 2019-04-11
 	 	return -1 if startDate > endDate -- startDate: 2018-04-11        endDate: 2017-04-11
 	 */
-	
 	public static int dateCompare(String startDate, String endDate, String fmt ) throws IOException { // String fmt == "yyyy-MM-dd";
 
 		DateFormat dateFormat = new SimpleDateFormat(fmt);
@@ -642,7 +790,26 @@ public class Olyutil {
 		return date2.compareTo(date1);	
 	}	
 	/*************************************************************************************************************************************************************/
-
+	public static ArrayList<String> customSplitSpecific(String s) {
+	    ArrayList<String> words = new ArrayList<String>();
+	    boolean notInsideComma = true;
+	    String mt = "null";
+	    int start =0, end=0;
+	    for(int i=0; i<s.length()-1; i++) {
+	    	if ( s.charAt(i)==',' &&  s.charAt(i+1)==',' ) {
+	    		words.add(mt);
+	    	}
+	        if(s.charAt(i)==',' && notInsideComma)
+	        {
+	            words.add(s.substring(start,i));
+	            start = i+1;                
+	        }   
+	        else if(s.charAt(i)=='"')
+	        notInsideComma=!notInsideComma;
+	    }
+	    words.add(s.substring(start));
+	    return words;
+	}  
 	
 	/*************************************************************************************************************************************************************/
 

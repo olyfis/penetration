@@ -13,9 +13,8 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
-
 public class TestOlyutil {
-
+	
 	static Statement stmt = null;
 	static Connection con = null;
 	static ResultSet res  = null;
@@ -23,10 +22,7 @@ public class TestOlyutil {
 	static String s = null;
 	static private PreparedStatement statement;
 	static String propFile = "C:\\Java_Dev\\props\\unidata.prop";
-	static String sqlFile = "C:\\Java_Dev\\props\\sql\\onelink.sql";
-	 
-		 
-	 
+	static String sqlFile = "C:\\Java_Dev\\props\\sql\\onelink.sql"; 
 	/****************************************************************************************************************************************************/
 	public static ArrayList<String> getDbData() throws IOException {
 		FileInputStream fis = null;
@@ -80,30 +76,29 @@ public class TestOlyutil {
 		return strArr;
 	}
 	/****************************************************************************************************************************************************/
-
-	/**
-	 * @throws IOException **************************************************************************************************************************************************/
-
-	
-	public static void main(String[] args) throws IOException {
-		 
+	/****************************************************************************************************************************************************/
+	public static void main(String[] args) throws IOException { 
 		/*  // Test DB connection 
 		ArrayList<String> strArr = new ArrayList<String>();
 		strArr = getDbData();
 		Olyutil.printStrArray(strArr);
-		*/
+		
 		String startDate = "2018-04-11";
 		String endDate = "2019-04-11";
 		String fmt = "yyyy-MM-dd";
 		int res;
-		
 		res = Olyutil.dateCompare(startDate, endDate, fmt);
 		System.out.println("startDate:" + startDate + "        endDate:" + endDate );
-		//System.out.println("endDate:" + endDate );
+		//System.out.println("endDate:" + endDate );	
+		System.out.println("dateCompare=" + res + "--");	
+		*/
 		
-		System.out.println("dateCompare=" + res + "--");
+		String n = "1234..56";
+		System.out.println("isNumeric returned:" + Olyutil.isNumeric(n) + "--");	
+		
+		String dateFmt = Olyutil.formatDate("yyyy-MM-dd hh:mm:ss.SSS");
+		System.out.println("Date: " + dateFmt);
 		
 		
 	}
-
 }
