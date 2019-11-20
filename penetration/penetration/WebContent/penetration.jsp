@@ -15,7 +15,7 @@
  <link rel="stylesheet" href="includes/css/calendar.css" />
     <script type="text/javascript" src="includes/scripts/pureJSCalendar.js"></script>
 
-
+<script type="text/javascript" src="includes/js/chartjs/chartjs-plugin-trendline.js"></script>
 
 
 <script language="javascript" type="text/javascript">

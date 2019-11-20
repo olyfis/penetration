@@ -175,7 +175,7 @@
 	<table border="2">
   <tr>
   <th class="b" > Surg Endo - Energy</th>
-    <th class="b" > </th>  
+   
   </tr>
   <tr>
     <td>
@@ -184,12 +184,14 @@
 		</div>
     
     </td>
+    <!--
     <td>
-		<!--   <div id="chart-containerMP">
+		   <div id="chart-containerMP">
 	 		<canvas id="mycanvasMP" ></canvas>	
 		</div>
-		-->
+		
 </td>
+-->
   </tr> 
 </table>
 

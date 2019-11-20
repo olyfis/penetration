@@ -80,7 +80,7 @@ $( document ).ready(function() {
 	      	      label: 'Penetration',
 	      	      yAxisID: 'B',      	    
 	      	    // data: [pen_arr[0],  pen_arr[1], pen_arr[2], pen_arr[3],  pen_arr[4], pen_arr[5]  ]
-	      	     data: pen_arr  
+	      	     data: pen_arr
 	      	    
 	      	    },
 	            
@@ -90,7 +90,10 @@ $( document ).ready(function() {
 		      	      yAxisID: 'A',
 		      	     // data: [sales_arr[0], pen_arr[0]]	 
 		      	     //data: [sales_arr[0],  sales_arr[1],     sales_arr[2],   sales_arr[3], sales_arr[4], sales_arr[5]  ]
-	            data:  sales_arr   
+	            data:  sales_arr
+	            
+	            
+	            
 	            }     
 	          ]	    
     	  },

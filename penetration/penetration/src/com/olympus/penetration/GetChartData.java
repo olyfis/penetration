@@ -5,10 +5,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.RoundingMode;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.text.DateFormatSymbols;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -33,8 +35,28 @@ import com.olympus.olyutil.Olyutil;
 @WebServlet("/getchart")
 public class GetChartData extends HttpServlet {
 	/****************************************************************************************************************************************************/
+
+	// usage: dRtn = roundDouble(pen, "UP", "0.00");
+	public static double roundDouble(double value, String direction, String fmt) {
+		
+		DecimalFormat df = new DecimalFormat(fmt);
+		double dVal = 0.0;
+		
+		if (direction.equals("DOWN")) {
+			df.setRoundingMode(RoundingMode.DOWN);
+		} else {
+			df.setRoundingMode(RoundingMode.UP);
+		}
+		String dStr = df.format(value);
+		dVal = Double.parseDouble(dStr);
+		
+		return(dVal);
+	}
+	
+	/****************************************************************************************************************************************************/
 	public static String yr2018 = "2018";
 	public static String yr2019 = "2019";
+	public static String yr2020 = "2020";
 	public static String[] shortMonths = new DateFormatSymbols().getShortMonths();
 	
 	public static ArrayList<String> customSplitSpecific(String s) {
@@ -98,6 +120,8 @@ public class GetChartData extends HttpServlet {
 			 yr = yr2018;
 		 } else if (items[1].equals("152P")) {
 			 yr = yr2019;
+		 } else if (items[1].equals("153P")) {
+			 yr = yr2020;
 		 }
 		 
 		double fSales = 0.0;
@@ -297,10 +321,12 @@ public class GetChartData extends HttpServlet {
 
 				// System.out.println("EligSales:" + sales);
 				// obj.put("sales", data.get(i).getEligSales());
-				obj.put("sales", sales);
+				obj.put("sales", roundDouble(sales, "UP", "0.00"));
 				pen = data.get(i).getPenPercent();
 				// pen = pen.replaceAll("%", "");
-				obj.put("pen", pen);
+				 
+				
+				obj.put("pen", roundDouble(pen, "UP", "0.00"));
 				obj.put("posn", data.get(i).getPosition() );
 				jsonArr.put(data.get(i).getPosition(), obj);
 			}
