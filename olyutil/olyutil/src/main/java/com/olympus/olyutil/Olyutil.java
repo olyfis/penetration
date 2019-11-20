@@ -2,6 +2,7 @@ package com.olympus.olyutil;
 
 import java.io.*;
 import java.lang.reflect.*;
+import java.math.RoundingMode;
 import java.nio.file.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,6 +13,7 @@ import java.nio.file.attribute.FileTime;
 import java.util.*;
 import java.sql.*;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -36,7 +38,53 @@ public class Olyutil {
 	static NodeList node = null;
 	static String s = null;
 	static private PreparedStatement statement;
+	/****************************************************************************************************************************************************/
+
+	// usage: dRtn = roundDouble(pen, "DOWN", "0.00");
+	public static double roundDouble(double value, String direction, String fmt) {
+		
+		DecimalFormat df = new DecimalFormat(fmt);
+		double dVal = 0.0;
+		
+		if (direction.equals("DOWN")) {
+			df.setRoundingMode(RoundingMode.DOWN);
+		} else {
+			df.setRoundingMode(RoundingMode.UP);
+		}
+		String dStr = df.format(value);
+		dVal = Double.parseDouble(dStr);
+		
+		return(dVal);
+	}
+	/****************************************************************************************************************************************************/
+	// String dateFmt = formatDate("yyyy-MM-dd");
+	// String dateFmt = Olyutil.formatDate("yyyy-MM-dd hh:mm:ss.SSS");
 	
+	public static String formatDate(String format) throws IOException {
+		SimpleDateFormat dateFormat = new SimpleDateFormat(format);
+		Date date = new Date();
+		return(dateFormat.format(date));
+	}
+	/****************************************************************************************************************************************************/
+	
+	// String from = "yyyy-MM-dd HH:mm:ss.SSS";
+	// String to = "yyyy-MM-dd";
+	// usage:  formatDate("2019-09-22 15:11:22.123", "yyyy-MM-dd hh:mm:ss.SSS", "yyyy-MM-dd")
+	public String formatDate(String dateVal, String from, String to  ) throws IOException {
+			 
+		String dateMyFormat = "";
+		SimpleDateFormat fromUser = new SimpleDateFormat(from); 
+        SimpleDateFormat myFormat = new SimpleDateFormat(to);
+
+        try {
+            Date dateFromUser = fromUser.parse(dateVal); // Parse it to the exisitng date pattern and return Date type
+            dateMyFormat = myFormat.format(dateFromUser); // format it to the date pattern you prefer
+            //System.out.println("DF=" + dateMyFormat); // outputs : 2009-05-19
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+		return(dateMyFormat); 
+	}
 	/*****************************************************************************************************************************************************/
 	public static ArrayList<String> getHashKeys(HashMap<String, String> kitMap, String key) throws IOException {
 			String valStr = "";;
@@ -85,15 +133,7 @@ public class Olyutil {
 	/*****************************************************************************************************************************************************/
 		
 	
-	/****************************************************************************************************************************************************/
-		// String dateFmt = formatDate("yyyy-MM-dd");
-		// String dateFmt = Olyutil.formatDate("yyyy-MM-dd hh:mm:ss.SSS");
-		
-		public static String formatDate(String format) throws IOException {
-			SimpleDateFormat dateFormat = new SimpleDateFormat(format);
-			Date date = new Date();
-			return(dateFormat.format(date));
-		}
+	
 	/****************************************************************************************************************************************************/
 	public static String getOlyutilVersion () {
 		String ver = " 1.0.2";
