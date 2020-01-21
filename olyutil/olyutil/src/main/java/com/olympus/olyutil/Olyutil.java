@@ -24,7 +24,13 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.json.simple.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.w3c.dom.*; 
+import org.w3c.dom.*;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 import org.json.*;
 
  
@@ -38,6 +44,132 @@ public class Olyutil {
 	static NodeList node = null;
 	static String s = null;
 	static private PreparedStatement statement;
+	/****************************************************************************************************************************************************/
+	static public JsonArray buildJSON(ArrayList<String> strArr, ArrayList<String> hdrArr) {
+		JsonArray jsonArr = new JsonArray();
+		//Olyutil.printStrArray(strArr);
+		int k = 0;
+		for (String str : strArr) { // iterating ArrayList
+			JsonObject obj = new JsonObject();
+			//System.out.println("Line: " + k +  " -- DATA:" + str + "---");
+			String[] items = str.split(";");
+		
+    		for (int i = 0; i < items.length; i++) {
+    			obj.addProperty(hdrArr.get(i).trim(), items[i]);
+    			//newStrArr.add(items[i]);
+    			//System.out.println(hdrArr.get(i).trim() + "-->" + items[i]);
+    		}	
+    		jsonArr.add(obj);
+    		k++;
+    		/*
+    		if (k > 0) {
+    			return;
+    		}
+    		*/
+		}
+		
+		return(jsonArr);
+	}
+	
+	/****************************************************************************************************************************************************/
+	static public JsonArray buildJSON(ArrayList<String> strArr, ArrayList<String> hdrArr, String sep) {
+		JsonArray jsonArr = new JsonArray();
+		//Olyutil.printStrArray(strArr);
+		int k = 0;
+		for (String str : strArr) { // iterating ArrayList
+			JsonObject obj = new JsonObject();
+			//System.out.println("Line: " + k +  " -- DATA:" + str + "---");
+			String[] items = str.split(sep);
+		
+    		for (int i = 0; i < items.length; i++) {
+    			obj.addProperty(hdrArr.get(i).trim(), items[i]);
+    			//newStrArr.add(items[i]);
+    			//System.out.println(hdrArr.get(i).trim() + "-->" + items[i]);
+    		}	
+    		jsonArr.add(obj);
+    		k++;
+    		/*
+    		if (k > 0) {
+    			return;
+    		}
+    		*/
+		}
+		
+		return(jsonArr);
+	}
+	
+	/****************************************************************************************************************************************************/
+
+	// Invoke: jsonWriterResponse(jArr, jsonFile);
+	public static void jsonWriter(JsonArray jArr, String filePath) {
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		try (FileWriter writer = new FileWriter(filePath)) {
+			gson.toJson(jArr, writer);
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	/****************************************************************************************************************************************************/
+	// Invoke: jsonWriterResponse( jArr, out);
+	public static void jsonWriterResponse(JsonArray jArr, PrintWriter out) {
+		String json = "";
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+		out.write("[");
+		for (int k = 0; k < jArr.size(); k++) {
+			if (k == (jArr.size() - 1)) {
+				// System.out.println("** " + jArr.get(k).toString() );
+				json = gson.toJson(jArr.get(k));
+				// System.out.println("******* " + json);
+			} else {
+				// System.out.println("** " + jArr.get(k).toString() );
+				json = gson.toJson(jArr.get(k)) + ",";
+				// System.out.println("******* " + json);
+			}
+
+			out.print(json);
+		}
+		out.write("]");
+	}
+	
+	/****************************************************************************************************************************************************/
+	// Usage: displayJsonObject(jobj);
+	public static void displayJsonObject(JsonObject jObj) {
+
+		// JsonObject row = (JsonObject) jArr.get(i);
+		if (jObj instanceof JsonObject) {
+			Set<String> keys = ((JsonObject) jObj).keySet();
+
+			// System.out.println("%%%%%%%%% KEYS %%%%%%%%" + keys.toString() + "keyNum=" +
+			// keys.size());
+			for (String key : keys) {
+				// System.out.println(key + ":" + jsonObject.get(key));
+				System.out.println("*******Key: " + key + " -> " + ((JsonObject) jObj).get(key));
+			}
+		}
+
+	}
+	/****************************************************************************************************************************************************/
+	// Usage: displayJsonArray(jArr);
+	public static void displayJsonArray(JsonArray jArr) {
+
+		for (int i = 0; i < jArr.size(); i++) {
+			JsonObject row = (JsonObject) jArr.get(i);
+			if (row instanceof JsonObject) {
+				Set<String> keys = ((JsonObject) row).keySet();
+
+				// System.out.println("%%%%%%%%% KEYS %%%%%%%%" + keys.toString() + "keyNum=" +
+				// keys.size());
+				for (String key : keys) {
+					// System.out.println(key + ":" + jsonObject.get(key));
+					System.out.println("*******Key: " + key + " -> " + ((JsonObject) row).get(key));
+				}
+			}
+		}
+	}
+	/****************************************************************************************************************************************************/
+
 	/****************************************************************************************************************************************************/
 
 	// usage: dRtn = roundDouble(pen, "DOWN", "0.00");
@@ -70,7 +202,7 @@ public class Olyutil {
 	// String from = "yyyy-MM-dd HH:mm:ss.SSS";
 	// String to = "yyyy-MM-dd";
 	// usage:  formatDate("2019-09-22 15:11:22.123", "yyyy-MM-dd hh:mm:ss.SSS", "yyyy-MM-dd")
-	public String formatDate(String dateVal, String from, String to  ) throws IOException {
+	public static String formatDate(String dateVal, String from, String to  ) throws IOException {
 			 
 		String dateMyFormat = "";
 		SimpleDateFormat fromUser = new SimpleDateFormat(from); 
@@ -108,7 +240,31 @@ public class Olyutil {
 			
 			return(strArr);
 		}
+	/*****************************************************************************************************************************************************/	
+	public static ArrayList<String> getHashKeys(HashMap<String, String> kitMap, String key, String sep) throws IOException {
+		String valStr = "";;
+		ArrayList<String> strArr = new ArrayList<String>();
+		String mapVal = "";
 		
+		Iterator it = kitMap.entrySet().iterator();
+	    while (it.hasNext()) {
+	    	Map.Entry pair = (Map.Entry)it.next();
+	    	
+	    	if ( pair.getKey().equals(key)) {
+	    		mapVal = (String) pair.getValue();
+	    		//System.out.println("**** mapData:" + pair.getKey() + " = " +mapVal);
+	    		String[] items = mapVal.split(sep);
+	    		for (int i = 0; i < items.length; i++) {
+	    			strArr.add(items[i]);
+	    		}		
+	    	}
+	        it.remove(); // avoids a ConcurrentModificationException
+	    }
+		
+		return(strArr);
+	}
+	
+	
 	/*****************************************************************************************************************************************************/	
 		public static void displayHashData(HashMap<String, String> kitMap, String key) throws IOException {
 			String valStr = "";;
@@ -136,7 +292,7 @@ public class Olyutil {
 	
 	/****************************************************************************************************************************************************/
 	public static String getOlyutilVersion () {
-		String ver = " 1.0.2";
+		String ver = " 1.0.3";
 		return(ver);
 	}
 	/***********************************************************************************************************************************/
@@ -274,7 +430,7 @@ public class Olyutil {
 		return (rs);
 	}
 	/*************************************************************************************************************************************************************/
-	public ArrayList<String> getFilesFromDir(String uploadDir) throws Exception { // Read files from a directory into an array
+	public static ArrayList<String> getFilesFromDir(String uploadDir) throws Exception { // Read files from a directory into an array
 		ArrayList<String> fileListArr = new ArrayList<String>();
 		
 		File f = new File(uploadDir); // current directory
@@ -292,7 +448,7 @@ public class Olyutil {
 		return fileListArr;
 	}
 	/*************************************************************************************************************************************************************/
-	public String do_getQuery(String sqlFilePath ) throws Exception { // read a query from a file and return the query
+	public static String do_getQuery(String sqlFilePath ) throws Exception { // read a query from a file and return the query
 		 String queryStr = "";
 		 
 			String s = new String();
@@ -311,7 +467,7 @@ public class Olyutil {
 		 return query;
 	 }
 	/*************************************************************************************************************************************************************/
-	public ArrayList<String> do_runQuery(Connection con, String query, String sep) throws Exception { // 
+	public static ArrayList<String> do_runQuery(Connection con, String query, String sep) throws Exception { // 
 		ArrayList<String> strArr = new ArrayList<String>();	
 
 		//System.out.println("**** Query: " + query);
@@ -331,7 +487,7 @@ public class Olyutil {
 		return strArr;
 	}
 	/*************************************************************************************************************************************************************/
-	public Boolean do_checkDbRec(Connection con, String recID, String query, String sep) throws Exception { // check for a particular recordId in a table
+	public static Boolean do_checkDbRec(Connection con, String recID, String query, String sep) throws Exception { // check for a particular recordId in a table
 		
 		Boolean status = false;
 		ArrayList<String> strArr = new ArrayList<String>();	
@@ -367,7 +523,7 @@ public class Olyutil {
 	}
 	/*************************************************************************************************************************************************************/
 	/*************************************************************************************************************************************************************/	
-	public void moveFile(String src, String dest) {
+	public static void moveFile(String src, String dest) {
 		CopyOption[] options = new CopyOption[] { StandardCopyOption.REPLACE_EXISTING };
 
 		Path sourcePath = Paths.get(src);
@@ -778,7 +934,7 @@ public class Olyutil {
 		return fileTime;
 	}
 	/*************************************************************************************************************************************************************/
-	public String returnLastModifyDate(String filePath) throws IOException {
+	public static String returnLastModifyDate(String filePath) throws IOException {
 		String date1 = null;
 
 		try {
